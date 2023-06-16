@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:todo/appbar.dart';
+import 'package:todo/app_bar.dart';
+import 'package:todo/search_box.dart';
 import 'package:todo/constants/constants.dart';
+import 'package:todo/todo_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,24 +28,29 @@ class _MyAppState extends State<MyApp> {
         appBar: const MyAppBar(),
         body: Column(children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: const TextField(
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(10),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: tdBlack,
-                    size: 20,
-                  ),
-                  prefixIconConstraints:
-                      BoxConstraints(maxHeight: 20, maxWidth: 20),
-                  hintText: "Search Task",
-                  hintStyle: TextStyle(color: tdBlack),
-                  border: InputBorder.none),
-            ),
-          )
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              child: const SearchBox()),
+          Expanded(
+              child: ListView(
+            children: const [
+              Text(
+                "All Task",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+              TodoItem(),
+              TodoItem(),
+              TodoItem(),
+               TodoItem(),
+              TodoItem(),
+              TodoItem(),
+               TodoItem(),
+              TodoItem(),
+              TodoItem(),
+            ],
+          ))
         ]),
       ),
     );
