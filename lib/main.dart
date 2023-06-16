@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todo/appbar.dart';
+import 'package:todo/constants/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,23 +15,35 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-  var indexToDisplay = 0;
-  var questions  = ["Whats your name?", "How are you"];
-
-  void  pressed(){
-    setState(() {
-      indexToDisplay++;
-    });
-  }
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: tdBGColor,
         appBar: const MyAppBar(),
         body: Column(children: [
-          Text(questions[indexToDisplay]),
-          ElevatedButton(onPressed: pressed, child: const Text("Press Me"))
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            child: const TextField(
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: tdBlack,
+                    size: 20,
+                  ),
+                  prefixIconConstraints:
+                      BoxConstraints(maxHeight: 20, maxWidth: 20),
+                  hintText: "Search Task",
+                  hintStyle: TextStyle(color: tdBlack),
+                  border: InputBorder.none),
+            ),
+          )
         ]),
       ),
     );
